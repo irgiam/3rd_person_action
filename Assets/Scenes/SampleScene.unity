@@ -342,7 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   target: {fileID: 231505543}
-  player: {fileID: 1847124624}
+  player: {fileID: 0}
 --- !u!1 &979558332
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ Transform:
   m_GameObject: {fileID: 979558332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.52, z: 0.39}
-  m_LocalScale: {x: 0.5, y: 0.1, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.1, z: 0.94}
   m_Children: []
   m_Father: {fileID: 1847124624}
   m_RootOrder: 0
@@ -3073,4 +3073,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 10
   gravity: 100
+  moveDirection: {x: 0, y: 0, z: 0}
   center: {fileID: 1283825332}

@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 10f;
     public float gravity = 20f;
-    Vector3 moveDirection = Vector3.zero;
+    public Vector3 moveDirection = Vector3.zero;
     float horizontalMove = 0;
     float verticalMove = 0;
-    float currentSpeed;
+    float currentSpeed, horizontalRotation, verticalRotation;
     public GameObject center;
     CharacterController controller;
 
@@ -25,18 +25,24 @@ public class PlayerController : MonoBehaviour
             horizontalMove = Input.GetAxisRaw("Horizontal");
             verticalMove = Input.GetAxisRaw("Vertical");
         }
+        if (horizontalMove!=0 || verticalMove != 0)
+        {
+            horizontalRotation = horizontalMove;
+            verticalRotation = verticalMove;
+        }
     }
 
     private void FixedUpdate()
     {
-        this.transform.Rotate(0, horizontalMove, 0);
-        moveDirection = new Vector3(0, 0, verticalMove);
-        moveDirection = transform.TransformDirection(moveDirection);
+        //this.transform.Rotate(0, horizontalMove, 0);
+        moveDirection = new Vector3(horizontalMove, 0, verticalMove);
+
+        Vector3 faceDirection = new Vector3(horizontalRotation, 0, verticalRotation);
+        this.transform.rotation = Quaternion.LookRotation(faceDirection);
+        //moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= walkSpeed;
 
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-
-        //transform.RotateAround(center.transform.position, Vector3.up*verticalMove, walkSpeed * Time.deltaTime); //jgn lupa verticalmove diluar grounded
     }
 }
