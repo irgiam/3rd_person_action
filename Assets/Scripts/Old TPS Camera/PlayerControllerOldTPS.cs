@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerOldTPS : MonoBehaviour
 {
     public float walkSpeed = 10f;
     public float gravity = 20f;
