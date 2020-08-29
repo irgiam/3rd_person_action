@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerOldTPS : MonoBehaviour
 {
     public float walkSpeed = 10f;
     public float gravity = 20f;
@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     float currentSpeed, horizontalRotation, verticalRotation;
     public GameObject center;
     CharacterController controller;
+
+
+    public Transform cam;
+    float turnSmoothVelocity;
+    public float turnSmoothTime = 0.1f;
 
     private void Awake()
     {
@@ -44,5 +49,22 @@ public class PlayerController : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+    }
+
+
+    void HanddleMovementBrackeysMethod() // brackeys method, langsung taro di fixedupdate/update. pake chinemachine->freelook
+    {
+        Vector3 direction = new Vector3(horizontalMove, 0, verticalMove).normalized; //normalized biar kecepatan konstan saat bergerak diagonal
+        if (direction.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            //transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            //moveDirection.y -= gravity * Time.deltaTime;
+            controller.Move(moveDirection.normalized);
+        }
     }
 }
