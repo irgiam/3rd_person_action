@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     CharacterController controller;
-    public float walkSpeed = 2f;
+    Animator thisaAnimator;
+    public LayerMask groundLayer;
+    public float moveSpeed = 2f;
     public float gravity = 20f;
     public float turnSmoothTime = 0.1f;
     public Transform cam;
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         controller = this.GetComponent<CharacterController>();
+        thisaAnimator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,32 +27,52 @@ public class PlayerController : MonoBehaviour
     {
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = 6f;
+        } else
+        {
+            moveSpeed = 2f;
+        }
+
+        float movement = Mathf.Clamp((Mathf.Abs(horizontalMove) + Mathf.Abs(verticalMove)), 0, 1);
+        thisaAnimator.SetFloat("Speed", (movement * moveSpeed));
+        HanddleMovement();
+        GravityHanddler();
     }
 
     private void FixedUpdate()
     {
-        HanddleMovement();
+        
     }
 
     void HanddleMovement()
     {
         Vector3 direction = new Vector3(horizontalMove, 0, verticalMove).normalized; //normalized biar kecepatan konstan saat bergerak diagonal
-        if (horizontalMove != 0 || verticalMove != 0)
+        if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             //transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             //moveDirection.y -= gravity * Time.deltaTime;
-            controller.Move(moveDirection.normalized);
+            controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
         }
-        else
+    }
+
+    void GravityHanddler()
+    {
+        Vector3 velocity = new Vector3();
+        if (Physics.CheckSphere(this.transform.position, 0.1f, groundLayer))
         {
-            Vector3 moveDirection = new Vector3(horizontalMove, 0, verticalMove);
-            moveDirection.y -= gravity * Time.deltaTime;
-            controller.Move(moveDirection.normalized);
+            velocity = Vector3.zero;
+            //Debug.Log("Grounded!!");
+        } else
+        {
+            velocity.y -= gravity * Time.deltaTime;
+            controller.Move(velocity);
         }
     }
 
