@@ -187,7 +187,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8520378}
-  m_LocalRotation: {x: 0.19275571, y: -0.00000001887655, z: 0.0000000037081018, w: 0.9812468}
+  m_LocalRotation: {x: 0.19275571, y: -0.000000018876554, z: 0.0000000037081025, w: 0.9812468}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -539,7 +539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809344041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.7695923, z: -8.255609}
+  m_LocalPosition: {x: 0, y: 17.949593, z: -8.255609}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1099349358}
@@ -625,8 +625,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.19739434, y: -0.000000017753585, z: 0.0000000035747942, w: 0.9803242}
-  m_LocalPosition: {x: 0, y: 4.7695923, z: -8.255609}
+  m_LocalRotation: {x: 0.19739436, y: -0.000000017753587, z: 0.000000003574795, w: 0.9803242}
+  m_LocalPosition: {x: 0, y: 17.949593, z: -8.255609}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -732,7 +732,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099349356}
-  m_LocalRotation: {x: 0.21057217, y: -0.000000014567054, z: 0.00000000313777, w: 0.97757834}
+  m_LocalRotation: {x: 0.21057218, y: -1.736528e-15, z: -7.0037885e-17, w: 0.97757834}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1816,7 +1816,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283825332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.04, z: 0}
+  m_LocalPosition: {x: 0, y: 14.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1283543954}
@@ -2652,7 +2652,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   moveSpeed: 1.5
-  gravity: 2
+  jumpHeight: 5
+  gravity: 10
   turnSmoothTime: 0.1
   cam: {fileID: 963194228}
 --- !u!1 &1283825640
@@ -3600,7 +3601,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670946544}
-  m_LocalRotation: {x: 0.17492273, y: 3.4979386e-15, z: -1.7736118e-16, w: 0.9845822}
+  m_LocalRotation: {x: 0.17492273, y: 0.000000016941094, z: -0.0000000030097864, w: 0.9845822}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
