@@ -45,6 +45,11 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Attack();
+        }
+
         float movement = Mathf.Clamp((Mathf.Abs(horizontalMove) + Mathf.Abs(verticalMove)), 0, 1);
         thisaAnimator.SetFloat("Speed", (movement * moveSpeed));
         thisaAnimator.SetBool("IsJumping", !isGrounded);
@@ -52,10 +57,6 @@ public class PlayerController : MonoBehaviour
         GravityHandler();
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
 
     void HandleMovement()
     {
@@ -88,5 +89,10 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         velocity.y += Mathf.Sqrt(jumpHeight * 3.0f * gravity);
+    }
+
+    void Attack()
+    {
+        Debug.Log("Atttack!");
     }
 }
