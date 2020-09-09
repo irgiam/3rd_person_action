@@ -55,12 +55,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
-            TakeDamage(20f);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && isGrounded && Time.time >= nextAttackTime)
         {
-            Attack();
+            thisaAnimator.SetTrigger("Attack");
+            StartCoroutine(Attack(0.5f));
             nextAttackTime = Time.time + 2f / attackRate;
         }
 
@@ -110,9 +110,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public LayerMask enemyLayer;
-    void Attack()
+    IEnumerator Attack(float time) //delay
     {
-        thisaAnimator.SetTrigger("Attack");
+        yield return new WaitForSeconds(time);
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, 0.8f, enemyLayer);
         foreach (Collider enemy in hitEnemies)
         {
